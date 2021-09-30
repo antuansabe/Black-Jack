@@ -9,6 +9,18 @@ let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
 
+let puntosJugador = 0,
+    puntosComputadora = 0;
+
+
+//Referencias del HTML
+const btnPedir = document.querySelector('#btnPedir');
+
+const puntosHTML = document.querySelectorAll('small');
+
+
+
+
 //Esta funcion crea una nueva baraja
 const crearDeck = ( ) => {
     
@@ -25,7 +37,6 @@ const crearDeck = ( ) => {
     }
     
     deck = _.shuffle( deck );
-    console.log( deck );
     return deck;
 }
 
@@ -40,13 +51,32 @@ const pedirCarta = () => {
 
     const carta = deck.pop();
 
-    console.log( deck )
-    console.log( carta ); // carta debe ser de la baraja
     return carta;
 }
-/*
-for ( let i =0; i <= 100; i++ ) {
-    pedirCarta();
-}
-*/
 
+const valorCarta = ( carta ) => {
+
+    const valor = carta.substring(0, carta.length -1);
+    
+    return( isNaN( valor ) ) ?
+    ( valor === 'A' ) ? 11 : 10
+    : valor * 1;
+    
+}
+
+const valor = valorCarta( pedirCarta() );
+
+
+// Eventos
+btnPedir.addEventListener('click', () => {
+    
+    const carta = pedirCarta();
+    
+    puntosJugador = puntosJugador + valorCarta( carta );
+    puntosHTML[0].innerHTML = puntosJugador; /* Con esta manipulacion del DOM
+    puedo reflejar el resultado de esta funcion en el html*/
+
+
+    
+    
+});
