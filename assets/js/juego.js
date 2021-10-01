@@ -15,7 +15,7 @@ let puntosJugador = 0,
 
 //Referencias del HTML
 const btnPedir = document.querySelector('#btnPedir');
-
+const divCartasJugador = document.querySelector('#jugador-cartas');
 const puntosHTML = document.querySelectorAll('small');
 
 
@@ -76,7 +76,18 @@ btnPedir.addEventListener('click', () => {
     puntosHTML[0].innerHTML = puntosJugador; /* Con esta manipulacion del DOM
     puedo reflejar el resultado de esta funcion en el html*/
 
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${ carta }.png`; // backticks me ayudan a insertar js
+    imgCarta.classList.add('carta'); //esto le agrega mi clase para poder añadir css
+    divCartasJugador.append( imgCarta );
 
-    
+    if ( puntosJugador > 21 ) {
+        btnPedir.disabled = true; //disabled deshabilita el boton
+    } else  if (puntosJugador === 21 ) {
+        console.warn('21, genial!');
+        btnPedir.disabled = true;
+        
+    }
+
     
 });
