@@ -15,11 +15,10 @@ let puntosJugador = 0,
 
 //Referencias del HTML
 const btnPedir = document.querySelector('#btnPedir');
+const btnDetener = document.querySelector('#btnDetener');
 const divCartasJugador = document.querySelector('#jugador-cartas');
+const divCartasComputadora = document.querySelector('#computadora-cartas');
 const puntosHTML = document.querySelectorAll('small');
-
-
-
 
 //Esta funcion crea una nueva baraja
 const crearDeck = ( ) => {
@@ -63,11 +62,34 @@ const valorCarta = ( carta ) => {
     : valor * 1;
     
 }
-
 const valor = valorCarta( pedirCarta() );
+
+//Logica del turno de la computadora 
+const turnoComputadora = ( puntosMinimos) => {
+    
+    do {  
+        const carta = pedirCarta();
+    
+        puntosComputadora = puntosComputadora + valorCarta( carta );
+        puntosHTML[1].innerHTML = puntosComputadora; /* Con esta manipulacion del DOM
+        puedo reflejar el resultado de esta funcion en el html*/
+    
+        const imgCarta = document.createElement('img');
+        imgCarta.src = `assets/cartas/${ carta }.png`; // backticks me ayudan a insertar js
+        imgCarta.classList.add('carta'); //esto le agrega mi clase para poder añadir css
+        divCartasComputadora.append( imgCarta );
+
+        if ( puntosMinimos > 21 ){
+            break;
+        }
+    } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos < 21 ) );
+    
+}
+
 
 
 // Eventos
+//Logica turno Jugador
 btnPedir.addEventListener('click', () => {
     
     const carta = pedirCarta();
@@ -82,12 +104,29 @@ btnPedir.addEventListener('click', () => {
     divCartasJugador.append( imgCarta );
 
     if ( puntosJugador > 21 ) {
+        console.warn('PERDISTE');
         btnPedir.disabled = true; //disabled deshabilita el boton
+        btnDetener.disabled = true;
+        turnoComputadora( puntosJugador );
+
     } else  if (puntosJugador === 21 ) {
         console.warn('21, genial!');
         btnPedir.disabled = true;
+        btnDetener.disabled = true;
+        turnoComputadora ( puntosJugador);
         
     }
 
+    
+});
+
+
+
+btnDetener.addEventListener('click', () => {
+    
+    btnPedir.disabled = true;
+    btnDetener.disabled = true;
+
+    turnoComputadora ( puntosJugador );
     
 });
