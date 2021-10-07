@@ -1,10 +1,9 @@
-/**
- * 2C= TWO OF CLUBS
- * 2D = TWO OF DIAMONDS
- * 2H = TWO OF HEARTS
- * 2S = TWO OF SPADES
- */
 
+
+(() => {
+    'use strict'
+    
+    
 let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['A', 'J', 'Q', 'K'];
@@ -35,7 +34,6 @@ const crearDeck = ( ) => {
             deck.push(esp + tipo);
         }
     }
-    
     deck = _.shuffle( deck );
     return deck;
 }
@@ -86,7 +84,7 @@ const turnoComputadora = ( puntosMinimos) => {
     } while ( (puntosComputadora < puntosMinimos) && (puntosMinimos < 21 ) );
     
     setTimeout(() => {
-        
+
     if ( puntosComputadora === puntosMinimos ){
         alert ('Nadie gana:(');
     } else if (puntosMinimos > 21 ) {
@@ -100,8 +98,6 @@ const turnoComputadora = ( puntosMinimos) => {
     }
 }, 10 );
 }
-
-
 
 // Eventos
 //Logica turno Jugador
@@ -164,4 +160,9 @@ btnNuevo.addEventListener('click', () => {
 
     
 });
+
+
+
+})();
+
 
