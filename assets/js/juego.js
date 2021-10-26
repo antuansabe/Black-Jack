@@ -3,17 +3,17 @@ const miModulo = (() => {
 
     let deck         = [];
     const tipos      = ['C','D','H','S'],
-          especiales = ['A','J','Q','K'];
+            especiales = ['A','J','Q','K'];
 
     let puntosJugadores = [];
 
     // Referencias del HTML
     const btnPedir   = document.querySelector('#btnPedir'),
-          btnDetener = document.querySelector('#btnDetener'),
-          btnNuevo   = document.querySelector('#btnNuevo');
+            btnDetener = document.querySelector('#btnDetener'),
+            btnNuevo   = document.querySelector('#btnNuevo');
 
     const divCartasJugadores = document.querySelectorAll('.divCartas'),
-          puntosHTML = document.querySelectorAll('small');
+            puntosHTML = document.querySelectorAll('small');
 
 
     // Esta función inicializa el juego 
@@ -50,6 +50,7 @@ const miModulo = (() => {
         }
         return _.shuffle( deck );;
     }
+
 
     // Esta función me permite tomar una carta
     const pedirCarta = () => {
